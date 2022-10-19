@@ -1,0 +1,88 @@
+<div class="container">
+    <h1>
+        WE appericate your feedback!
+    </h1>
+    <form #feedbackForm="ngForm" (ngSubmit)="onSubmit()">
+        <div>
+            <!-- <lable for="name">Enter First Name </lable> -->
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="Type Here" name="firstName" [(ngModel)]="feedback.firstName" minlength="3"
+                    required #first="ngModel" [class.is-invalid]="first.invalid && first.touched">
+
+                <div *ngIf="first.errors?.['minlength']; then thenBlock else elseBlock"></div>
+                <ng-template #thenBlock><small>First Name minimum length is 3.</small></ng-template>
+                <ng-template #elseBlock><small *ngIf="first.touched && first.invalid" class="text-danger">First Name is required</small></ng-template>
+    
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Type Here" name="lastName" [(ngModel)]="feedback.lastName" minlength="3"
+                    required #last="ngModel" [class.is-invalid]="last.invalid && last.touched">
+
+                <div *ngIf="last.errors?.['minlength']; then thenBlock else elseBlock"></div>
+                <ng-template #thenBlock><small>Last Name minimum length is 3.</small></ng-template>
+                <ng-template #elseBlock><small *ngIf="last.touched && last.invalid" class="text-danger">Last Name is required</small></ng-template>
+
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" placeholder="Type Here" name="email"  required pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" 
+                    #Email="ngModel" [(ngModel)]="feedback.email">
+                    <div *ngIf="Email?.invalid && (Email?.dirty || Email?.touched)">
+                        <small *ngIf="Email.errors?.['required']" class="text-danger">
+                            Email Required
+                        </small>
+                        <small *ngIf="Email.errors?.['pattern']" class="text-danger">
+                            Enter Valid Email Id
+                        </small>
+                    </div>
+
+                <!-- <small *ngIf="Email.touched && Email.invalid" class="text-danger">Email ID is required</small> -->
+            </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <input matInput type="tel" name="phoneNo" placeholder="Phone Number" required pattern="^(7|8|9)\d{9}$"  #phoneNo="ngModel" [(ngModel)]="feedback.phone">
+                        <div *ngIf="phoneNo?.invalid && (phoneNo?.dirty || phoneNo?.touched)">
+                            <small *ngIf="phoneNo.errors?.['required']" class="text-danger">
+                                Phone Number is required
+                            </small>
+                            <small *ngIf="phoneNo.errors?.['pattern']" class="text-danger">
+                                Number should be start from 7, 8 or 9 and of 10 digits
+                            </small>
+                        </div>
+                    </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill" >
+                <mat-label>Location You Visited</mat-label>
+                <mat-select name="location">
+                    <mat-option *ngFor="let location of locations" value="{{location}}" >
+                        {{location}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+
+            <span id="rating"> Over All Rating </span>
+            <mat-radio-group aria-label="Select an option" [(ngModel)]="feedback.rating">
+                <mat-radio-button value="1">Excellent</mat-radio-button>
+                <mat-radio-button value="2">Good</mat-radio-button>
+                <mat-radio-button value="3">Average</mat-radio-button>
+                <mat-radio-button value="4">Dissatified</mat-radio-button>
+            </mat-radio-group>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Any comments , questions or suggestions</mat-label>
+                <textarea matInput placeholder="Type Here"></textarea>
+            </mat-form-field>
+            <br>
+
+                                        <pre>
+                                        <input type="submit" class="btn btn-danger" value="Submit" [disabled]="feedbackForm.invalid">          <input type="reset" class="btn btn-danger" value="reset" >      
+                                        </pre>
+
+        </div>
+    </form>
+</div>

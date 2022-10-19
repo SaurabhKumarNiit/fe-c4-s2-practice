@@ -1,0 +1,26 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    
+  }
+  
+  .example-full-width {
+    width: 100%;
+    
+  }
+
+  #rating{
+    margin-right: 60px;
+    font-size: x-large;
+  }
+  mat-radio-button{
+    margin-right: 30px;
+  }
+  .container{
+    border: 2px solid black;
+    width: 800px;
+  }
+  #button{
+    color:rgb(106, 27, 40);
+  }
